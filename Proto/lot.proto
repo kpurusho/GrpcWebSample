@@ -1,0 +1,46 @@
+syntax = "proto3";
+package lotresult;
+
+service LotService {
+  rpc GetLot (LotRequest) returns (LotResponse);
+  rpc GetWafer (WaferRequest) returns (WaferResponse);
+  rpc GetDefects (DefectsRequest) returns (DefectsResponse);
+  rpc GetDefect (DefectRequest) returns (Defect);
+}
+
+message LotRequest {
+  string Name = 1;
+}
+message LotResponse {
+  string Name = 1;
+  int32 Id = 2;
+  repeated int32 WaferIds = 3;
+}
+
+message WaferRequest {
+  int32 Id = 1;
+}
+message WaferResponse {
+	string Name = 1;
+	int32 Id = 2;
+	repeated int32 DefectIds = 3;
+}
+
+message DefectsRequest {
+	int32 WaferId = 1;
+}
+message DefectsResponse {
+	repeated Defect Defects = 1;
+}
+message DefectRequest {
+	int32 WaferId = 1;
+	int32 Id = 2;
+}
+
+message Defect {
+	int32 Id = 1;
+	int32 X = 2;
+	int32 Y = 3;
+	int32 Classcode = 4;
+	int32 Roughcode = 5;
+}
